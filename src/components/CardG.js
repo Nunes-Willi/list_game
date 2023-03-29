@@ -9,6 +9,7 @@ export default function CardG(props) {
         resizeMode="cover"
       />
       <Text style={{ color: "black" }}> {props.game.titulo} </Text>
+      <Text style={{ color: "black" }}> Gênero: {props.game.genero} </Text>
       <Text style={{ fontSize: 12 }}> R$ {props.game.preco}</Text>
       <TouchableOpacity onPress={props.deletarGame} style={styles.botao}>
         <Text style={{ color: "black", fontWeight: "bold" }}>Deletar</Text>
