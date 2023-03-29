@@ -1,27 +1,14 @@
-import { StyleSheet, Text, Image, View, ScrollView } from "react-native";
-
-function Card(props) {
-  return (
-    <View style={styles.card}>
-      <Image
-        style={styles.game}
-        source={{ uri: props.game.capa }}
-        resizeMode="cover"
-      />
-      <Text style={{ color: "darkred" }}> {props.game.titulo} </Text>
-      <Text style={{ fontSize: 12 }}> R$ {props.game.preco}</Text>
-      {/* <RemoveButton onRemove={(game.id)}></RemoveButton> */}
-    </View>
-  );
-}
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React from "react";
+import CardG from "./src/components/CardG";
 
 export default function App() {
-  const games = [
+  const [games, setGames] = React.useState([
     {
       id: 1,
       capa: "https://upload.wikimedia.org/wikipedia/pt/9/9c/Minecraft_capa.png",
       titulo: "Minecraft",
-      preco: "100,00",
+      preco: "38,90",
     },
 
     {
@@ -51,22 +38,22 @@ export default function App() {
       titulo: "Watch Dogs",
       preco: "126,85",
     },
-  ];
+  ]);
 
-  // const Deletar = ({ onPress }) => {
-  //   return (
-  //     <TouchableOpacity onPress={onPress}>
-  //       <Text> Deletar </Text>
-  //     </TouchableOpacity>
-  //   );
-  // };
+  const deletarGame = (id) => {
+    const index = games.findIndex((game) => game.id === id);
+    const novaLista = [...games];
+    novaLista.splice(index, 1);
+    setGames(novaLista);
+  };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={{ fontSize: 25, fontWeight: "bold" }}>The Best Games!!</Text>
       <View style={styles.conteudo}>
+        
         {games.map((game) => (
-          <Card game={game} key={game.id} />
+          <CardG game={game} key={game.id} deletarGame={() => deletarGame(game.id)} />
         ))}
       </View>
     </ScrollView>
@@ -88,21 +75,5 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-  },
-
-  card: {
-    backgroundColor: "red",
-    width: "45%",
-    height: 250,
-    borderRadius: 10,
-    margin: 15,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  game: {
-    resizeMode: "stretch",
-    width: "100%",
-    height: 180,
   },
 });
