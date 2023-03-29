@@ -8,14 +8,15 @@ export default function CardG(props) {
         source={{ uri: props.game.capa }}
         resizeMode="cover"
       />
-      <Text style={{ color: "darkred" }}> {props.game.titulo} </Text>
+      <Text style={{ color: "black" }}> {props.game.titulo} </Text>
       <Text style={{ fontSize: 12 }}> R$ {props.game.preco}</Text>
       <TouchableOpacity onPress={props.deletarGame} style={styles.botao}>
-        <Text style={{ color: "white", fontWeight: "bold" }}>Deletar</Text>
+        <Text style={{ color: "black", fontWeight: "bold" }}>Deletar</Text>
       </TouchableOpacity>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   card: {
